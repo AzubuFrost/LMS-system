@@ -1,0 +1,101 @@
+﻿using AutoMapper;
+using BL.Managers.Interfaces;
+using BL.Util;
+using Data.Repositories;
+using Data.Repositories.Interfaces;
+using Model.Dto;
+using Model.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BL.Managers
+{
+    public class StudentManager : IStudentManager
+    {
+        private IStudentRepository _studentRepository;
+        
+
+        public StudentManager(IStudentRepository studentRepository)
+        {
+            _studentRepository = studentRepository;
+            
+        }
+
+        public Student CreateStudent(Student student)
+        {
+
+            if (!_studentRepository.Records.Any(x => x.Email == student.Email))
+            {
+                return _studentRepository.Add(student);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<StudentDto> GetAll()
+        {
+            var students = _studentRepository.GetAll().ToList();
+
+            var studentDtos = Mapper.Map<List<Student>, List<StudentDto>>(students);
+
+            return studentDtos.ToList();
+
+        }
+
+        public Student GetStudentById(int id)
+        {
+            var student = _studentRepository.GetById(id);
+         
+            if (student != null)
+                return student;
+            else return null;
+        }
+
+        public string Delete(Student student)
+        {
+            if (_studentRepository.Records.Any(s => s.Id == student.Id))
+            {
+                _studentRepository.Delete(student);
+                return "successfully deleted";
+            }
+            else return "deleted failed";
+        }
+
+        public StudentCourseDto GetStudentByIdWithCourses(int id)
+        {
+            return _studentRepository.GetStudentByIdWithCourses(id);
+        }
+
+        public StudentSearchDto SearchStudent(SearchAttribute search)
+        {
+            if (search.PageNumber == 0)
+            { 
+                search.PageNumber = 1;
+            }
+            if (search.PageSize == 0)
+            {
+                search.PageSize = 10; 
+            }
+            var students = _studentRepository.Records.Search(search.SearchValue);
+
+            students = students.ApplySort(search.SortString, search.SortOrder);
+
+            var SearchResult = new StudentSearchDto
+            {
+                PageSize = search.PageSize,
+                TotalPage = students.Count() / search.PageSize + (students.Count() % search.PageSize == 0 ? 0 : 1)
+            };
+
+            SearchResult.PageNumber = search.PageNumber > SearchResult.TotalPage ? 1 : search.PageNumber;
+
+            SearchResult.Students = Mapper.Map<List<Student>, List<StudentDto>>(students.Skip((SearchResult.PageNumber - 1) * SearchResult.PageSize ).Take(SearchResult.PageSize).ToList());
+
+            return SearchResult;
+        }
+    }
+}
