@@ -51,10 +51,9 @@ namespace Data.Repositories
                 };
         }
 
-        public override Student GetById(int id)
-        {
-            return _context.Students.Include(x => x.StudentCourses).FirstOrDefault(x => x.Id == id);
-        }
+
+
+
     }
 
 }

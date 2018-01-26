@@ -19,5 +19,7 @@ namespace BL.Managers.Interfaces
         LectureCourseDto GetLectureByIdWithCourses(int id);
 
         string Delete(Lecture Lecture);
+
+        LectureCourse EnrollCourse(LectureCourse lectureCourse);
     }
 }

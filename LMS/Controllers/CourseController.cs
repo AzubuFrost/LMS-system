@@ -1,4 +1,6 @@
-﻿using BL.Managers.Interfaces;
+﻿using AutoMapper;
+using BL.Managers.Interfaces;
+using Model.Dto;
 using Model.Model;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace LMS.Controllers
         public IHttpActionResult Get()
         {
            
-            return Ok(_courseManager.getAll());
+            return Ok(Mapper.Map<List<Course>,List<CourseDto>>(_courseManager.getAll()));
         }
 
         // GET: api/Course/5
@@ -33,10 +35,11 @@ namespace LMS.Controllers
             var course = _courseManager.getById(id);
             if (course == null)
                 return NotFound();
-            else return Ok(course);
+            else return Ok(Mapper.Map<Course,CourseDto>(course));
         }
 
         // POST: api/Course
+        [HttpPost]
         [Route("courses/create")]
         public IHttpActionResult Post(Course course)
         {
@@ -52,7 +55,8 @@ namespace LMS.Controllers
         }
 
         // DELETE: api/Course/5
-        [Route("courses/delete/{id}")]
+        [HttpPost]
+        [Route("courses/delete")]
         public IHttpActionResult Delete(int id)
         {
             var course = _courseManager.getById(id);

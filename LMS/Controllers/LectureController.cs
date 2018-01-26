@@ -1,4 +1,6 @@
-﻿using BL.Managers.Interfaces;
+﻿using AutoMapper;
+using BL.Managers.Interfaces;
+using Model.Dto;
 using Model.Model;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,7 @@ namespace LMS.Controllers
             _lectureManager = LectureManager;
         }
         // GET: api/Lecture
-        [Route("Lecture/{id}/withcourses")]
+        [Route("lectures/{id}/withcourses")]
         public IHttpActionResult GetLectureByIdWithCourses(int id)
         {
             var lecturecoursedto = _lectureManager.GetLectureByIdWithCourses(id);
@@ -28,22 +30,22 @@ namespace LMS.Controllers
         }
 
         //GET: api/Lecture/5
-        [Route("Lectures")]
+        [Route("lectures/getall")]
         public IHttpActionResult GetAll()
         {
-            return Ok(_lectureManager.GetAll());
+            return Ok(Mapper.Map<List<Lecture>,List<LectureDto>>(_lectureManager.GetAll()));
         }
 
-        [Route("Lectures/{id}")]
+        [Route("lectures/{id}")]
         public IHttpActionResult GetLecturesById(int id)
         {
             var Lecture = _lectureManager.GetLectureById(id);
             if (Lecture == null) return BadRequest();
-            else return Ok(Lecture);
+            else return Ok(Mapper.Map<Lecture,LectureDto>(Lecture));
         }
 
         // POST: api/Lecture
-        [Route("Lectures/create")]
+        [Route("lectures/create")]
         public IHttpActionResult Post(Lecture Lecture)
         {
             var stu = _lectureManager.CreateLecture(Lecture);
@@ -57,12 +59,22 @@ namespace LMS.Controllers
         }
 
         // DELETE: api/Lecture/5
+        [Route("lectures/delete")]
         public IHttpActionResult Delete(int id)
         {
             var Lecture = _lectureManager.GetLectureById(id);
             if (Lecture == null) return BadRequest();
             else return Ok(_lectureManager.Delete(Lecture));
 
+        }
+        [Route("lectures/enroll")]
+        public IHttpActionResult Enroll(LectureCourse lectureCourse)
+        {
+            var temp = _lectureManager.EnrollCourse(lectureCourse);
+
+            if (temp == null) return Ok("already enrolled");
+
+            else return Ok(temp);
         }
     }
 }

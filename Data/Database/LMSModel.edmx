@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Descriptoin" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Fee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MaxStudent" Type="int" Nullable="false" />
         </EntityType>
@@ -19,14 +19,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="LectureCourse">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LectureId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
@@ -168,11 +168,11 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Descriptoin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Fee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="MaxStudent" Type="Int32" Nullable="false" />
           <NavigationProperty Name="LectureCourses" Relationship="LMSModel.FK_LectureCourse_Course" FromRole="Course" ToRole="LectureCourse" />
           <NavigationProperty Name="StudentCourses" Relationship="LMSModel.FK_StudentCourse_Course" FromRole="Course" ToRole="StudentCourse" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Lecture">
           <Key>
@@ -284,9 +284,9 @@
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="LMSModel.Course">
               <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MaxStudent" ColumnName="MaxStudent" />
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
-                <ScalarProperty Name="Descriptoin" ColumnName="Descriptoin" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

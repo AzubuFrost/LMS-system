@@ -66,7 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\CourseDto.cs" />
     <Compile Include="Dto\LectureCourseDto.cs" />
+    <Compile Include="Dto\LectureDto.cs" />
     <Compile Include="Dto\StudentSearchDto.cs" />
     <Compile Include="Dto\StudentCourseDto.cs" />
     <Compile Include="Dto\StudentDto.cs" />

@@ -12,10 +12,14 @@ namespace BL.Managers
     public class CourseManager : ICourseManager
     {
         private ICourseRepository _courseRepository;
+        private IStudentCourseRepository _studentCourseRepository;
+        private ILectureCourseRepository _lectureCourseRepository;
 
-        public CourseManager(ICourseRepository courseRepository)
+        public CourseManager(ICourseRepository courseRepository, IStudentCourseRepository studentCourseRepository, ILectureCourseRepository lectureCourseRepository)
         {
             _courseRepository = courseRepository;
+            _studentCourseRepository = studentCourseRepository;
+            _lectureCourseRepository = lectureCourseRepository;
         }
         public Course getById(int id)
         {
@@ -35,11 +39,31 @@ namespace BL.Managers
 
         public string Delete(Course course)
         {
-            if (_courseRepository.Records.Any(c => c.Equals(course)))
+            if (_courseRepository.Records.Any(c => c.Id == course.Id))
             {
+                if (_lectureCourseRepository.Records.Any(lc => lc.CourseId == course.Id))
+                {
+                    var lecturecourses = _lectureCourseRepository.Records.Where(lc => lc.CourseId == course.Id);
+
+                    _lectureCourseRepository.Records.RemoveRange(lecturecourses);
+
+                    _lectureCourseRepository.SaveChanges();
+                }
+                //--------------------------------------------------------------
+                if (_studentCourseRepository.Records.Any(sc => sc.CourseId == course.Id))
+                {
+                    var studentcourses = _studentCourseRepository.Records.Where(sc => sc.CourseId == course.Id);
+
+                    _studentCourseRepository.Records.RemoveRange(studentcourses);
+
+                    _studentCourseRepository.SaveChanges();
+                }
+                //----------------------------------------------------------------
                 _courseRepository.Delete(course);
+
                 return "successfully deleted";
             }
+
             else return "failed";
         }
 

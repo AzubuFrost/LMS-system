@@ -17,6 +17,7 @@ namespace Data.Repositories.Interfaces
         T Add(T record);
         T Update(T record);
         void Delete(T record);
+        void SaveChanges();
     }
 
 }

@@ -15,34 +15,34 @@ namespace LMS.Controllers
     [RoutePrefix("api")]
     public class StudentController : ApiController
     {
-        private readonly IStudentManager _StudentManager;
+        private readonly IStudentManager _studentManager;
 
         public StudentController(IStudentManager StudentManager)
         {
-            _StudentManager = StudentManager;
+            _studentManager = StudentManager;
         }
         // GET: api/Student
        
         [Route("students/{id}/withcourses")]
         public IHttpActionResult GetStudentByIdWithCourses(int id)
         {
-            var studentcoursedto = _StudentManager.GetStudentByIdWithCourses(id);
+            var studentcoursedto = _studentManager.GetStudentByIdWithCourses(id);
             if (studentcoursedto == null) return BadRequest();
-           else return Ok(_StudentManager.GetStudentByIdWithCourses(id));
+           else return Ok(_studentManager.GetStudentByIdWithCourses(id));
         }
 
         //GET: api/Student/5
         [Route("students/getall")]
         public IHttpActionResult GetAll()
         {
-            var students = _StudentManager.GetAll();
+            var students = _studentManager.GetAll();
             return Ok(students);
         }
 
         [Route("students/{id}")]
         public IHttpActionResult GetStudentsById(int id )
         {
-            var student = _StudentManager.GetStudentById(id);
+            var student = _studentManager.GetStudentById(id);
             if (student == null) return BadRequest();
             else return Ok(Mapper.Map<Student,StudentDto>(student));
         }
@@ -51,7 +51,7 @@ namespace LMS.Controllers
         [Route("students/create")]
         public IHttpActionResult Post(Student student)
         {
-            var stu = _StudentManager.CreateStudent(student);
+            var stu = _studentManager.CreateStudent(student);
             if (stu != null) return Ok(student);
             else return Conflict();
         }
@@ -62,12 +62,13 @@ namespace LMS.Controllers
         }
 
         // DELETE: api/Student/5
-        [Route("students/delete/{id}")]
+        [HttpPost]
+        [Route("students/delete")]
         public IHttpActionResult Delete(int id)
         {
-            var student = _StudentManager.GetStudentById(id);
+            var student = _studentManager.GetStudentById(id);
             if (student == null) return BadRequest();
-            else return Ok(_StudentManager.Delete(student));
+            else return Ok(_studentManager.Delete(student));
 
            
         }
@@ -83,9 +84,18 @@ namespace LMS.Controllers
                 PageNumber = pageNumber,
                 PageSize = pageSize
             };
-            StudentSearchDto students = _StudentManager.SearchStudent(search);
+            StudentSearchDto students = _studentManager.SearchStudent(search);
 
             return Ok(students);
+        }
+        [Route("students/enroll")]
+        public IHttpActionResult Enroll(StudentCourse studentCourse)
+        {
+            var temp = _studentManager.EnrollCourse(studentCourse);
+
+            if (temp == null) return Ok("already enrolled");
+
+            else return Ok(temp);
         }
     }
 }

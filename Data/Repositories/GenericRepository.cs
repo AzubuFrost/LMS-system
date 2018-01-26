@@ -54,6 +54,12 @@ namespace Data.Repositories
             _context.SaveChanges();
             return record;
         }
+        public virtual void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
+        
     }
 
 }

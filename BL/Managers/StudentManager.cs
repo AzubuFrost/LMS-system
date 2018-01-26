@@ -16,12 +16,34 @@ namespace BL.Managers
     public class StudentManager : IStudentManager
     {
         private IStudentRepository _studentRepository;
-        
+        private IStudentCourseRepository _studentCourseRepository;
 
-        public StudentManager(IStudentRepository studentRepository)
+        public StudentManager(IStudentRepository studentRepository,IStudentCourseRepository studentCourseRepository)
         {
             _studentRepository = studentRepository;
+            _studentCourseRepository = studentCourseRepository;
             
+        }
+
+        public StudentCourse EnrollCourse(StudentCourse studentCourse)
+        {
+            if (!_studentCourseRepository.Records.Any(sc => sc.CourseId == studentCourse.CourseId && sc.StudentId == studentCourse.StudentId)
+                && _studentRepository.Records.Where(sc =>sc.Id == studentCourse.StudentId).FirstOrDefault().Credit > 0)
+
+            {
+                _studentCourseRepository.Add(studentCourse);
+
+                var student = _studentRepository.Records.Where(sc => sc.Id == studentCourse.StudentId).FirstOrDefault();
+
+                student.Credit = student.Credit - 4;
+                //need to change futher
+                
+                _studentRepository.Update(student);
+
+                return studentCourse;
+            }
+
+            else return null;
         }
 
         public Student CreateStudent(Student student)
@@ -60,10 +82,21 @@ namespace BL.Managers
         {
             if (_studentRepository.Records.Any(s => s.Id == student.Id))
             {
+                if (_studentCourseRepository.Records.Any(sc => sc.StudentId == student.Id))
+                {
+                    var studentcourses = _studentCourseRepository.Records.Where(sc => sc.StudentId == student.Id);
+
+                    _studentCourseRepository.Records.RemoveRange(studentcourses);
+
+                    _studentCourseRepository.SaveChanges();
+                }
+
                 _studentRepository.Delete(student);
+
                 return "successfully deleted";
             }
-            else return "deleted failed";
+            else return "No such student";
+           
         }
 
         public StudentCourseDto GetStudentByIdWithCourses(int id)

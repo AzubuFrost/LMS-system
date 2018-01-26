@@ -14,13 +14,13 @@ namespace BL
     {
         public static void RegisterTypes(ContainerBuilder builder)
         {
-            //var currentAssembly = Assembly.GetExecutingAssembly();
-            //builder.RegisterAssemblyTypes(currentAssembly)
-            // .Where(t => t.Name.EndsWith("Manager"))
-            //  .AsImplementedInterfaces();
-           builder.RegisterType<StudentManager>().As<IStudentManager>().InstancePerRequest();
-           builder.RegisterType<UserManager>().As<IUserManager>().InstancePerRequest();
-            builder.RegisterType<LectureManager>().As<ILectureManager>().InstancePerRequest();
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(currentAssembly)
+             .Where(t => t.Name.EndsWith("Manager"))
+              .AsImplementedInterfaces();
+           //builder.RegisterType<StudentManager>().As<IStudentManager>().InstancePerRequest();
+           //builder.RegisterType<UserManager>().As<IUserManager>().InstancePerRequest();
+           // builder.RegisterType<LectureManager>().As<ILectureManager>().InstancePerRequest();
         }
     }
 

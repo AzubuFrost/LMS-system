@@ -1,4 +1,5 @@
 ﻿using BL.Managers.Interfaces;
+using Data.Repositories;
 using Data.Repositories.Interfaces;
 using Model.Dto;
 using Model.Model;
@@ -13,21 +14,36 @@ namespace BL.Managers
 
         public class LectureManager : ILectureManager
         {
-            private ILectureRepository _LectureRepository;
+            private ILectureRepository _lectureRepository;
+            private ILectureCourseRepository _lectureCourseRepository;
 
-
-            public LectureManager(ILectureRepository LectureRepository)
+        public LectureManager(ILectureRepository LectureRepository,ILectureCourseRepository lectureCourseRepository)
             {
-                _LectureRepository = LectureRepository;
+                _lectureRepository = LectureRepository;
+                _lectureCourseRepository = lectureCourseRepository;
 
             }
 
-            public Lecture CreateLecture(Lecture Lecture)
+        public LectureCourse EnrollCourse(LectureCourse lectureCourse)
+        {
+            
+            if (!_lectureCourseRepository.Records.Any(lc => lc.CourseId == lectureCourse.CourseId && lc.LectureId == lectureCourse.LectureId))
+
+            {
+                _lectureCourseRepository.Add(lectureCourse);
+
+                return lectureCourse;
+            }
+
+            else return null;
+        }
+
+        public Lecture CreateLecture(Lecture Lecture)
             {
 
-                if (!_LectureRepository.Records.Any(x => x.Name == Lecture.Name))
+            if (!_lectureRepository.Records.Any(x => x.Name == Lecture.Name))
                 {
-                    return _LectureRepository.Add(Lecture);
+                    return _lectureRepository.Add(Lecture);
                 }
                 else
                 {
@@ -37,7 +53,7 @@ namespace BL.Managers
 
             public List<Lecture> GetAll()
             {
-                var lectures = _LectureRepository.GetAll().ToList();
+                var lectures = _lectureRepository.GetAll().ToList();
 
                 return lectures;
 
@@ -45,25 +61,40 @@ namespace BL.Managers
 
             public Lecture GetLectureById(int id)
             {
-                var Lecture = _LectureRepository.GetById(id);
+                var Lecture = _lectureRepository.GetById(id);
                 if (Lecture != null)
-                    return _LectureRepository.GetById(id);
+                    return _lectureRepository.GetById(id);
                 else return null;
             }
 
-            public string Delete(Lecture Lecture)
+        public string Delete(Lecture lecture)
+        {
+            if (_lectureRepository.Records.Any(s => s.Id == lecture.Id))
             {
-                if (_LectureRepository.Records.Any(s => s.Id == Lecture.Id))
-                {
-                    _LectureRepository.Delete(Lecture);
-                    return "successfully deleted";
-                }
-                else return "deleted failed";
-            }
+                
 
-            public LectureCourseDto GetLectureByIdWithCourses(int id)
+
+
+                if (_lectureCourseRepository.Records.Any(sc => sc.LectureId == lecture.Id))
+                {
+                    var lecturecourses = _lectureCourseRepository.Records.Where(sc => sc.LectureId == lecture.Id);
+
+                    _lectureCourseRepository.Records.RemoveRange(lecturecourses);
+
+                    _lectureCourseRepository.SaveChanges();
+                }
+
+                _lectureRepository.Delete(lecture);
+
+                return "successfully deleted";
+            }
+            else return "No such lecture";
+
+        }
+
+        public LectureCourseDto GetLectureByIdWithCourses(int id)
             {
-                return _LectureRepository.GetLectureByIdWithCourses(id);
+                return _lectureRepository.GetLectureByIdWithCourses(id);
             }
         }
 

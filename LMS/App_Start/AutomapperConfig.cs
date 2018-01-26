@@ -14,8 +14,8 @@ namespace LMS.App_Start
         {
             Mapper.Initialize(config =>
             {
-                //config.CreateMap<Student, StudentDto>();
-                //config.CreateMap<List<Student>, List<StudentDto>>();
+                config.CreateMap<Course, CourseDto>();
+                config.CreateMap<Lecture, LectureDto>();
                 config.CreateMap<Student, StudentDto>()
 .ForMember(d => d.FullName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName)); ;
 
