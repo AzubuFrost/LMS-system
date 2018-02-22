@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace LMS.Controllers
 {
+    [Authorize]
     [RoutePrefix("api")]
     public class LecturerController : ApiController
     {

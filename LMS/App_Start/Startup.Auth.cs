@@ -40,7 +40,7 @@ namespace LMS
                 Provider = new TokenBasedOauthProvider(),
 
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(365),
                 // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };

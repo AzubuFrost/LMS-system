@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace LMS.Controllers
 {
+    [Authorize]
     [RoutePrefix("api")]
     public class StudentController : ApiController
     {
@@ -32,6 +33,7 @@ namespace LMS.Controllers
         }
 
         //GET: api/Student/5
+        
         [Route("students/getall")]
         public IHttpActionResult GetAll()
         {
@@ -79,7 +81,7 @@ namespace LMS.Controllers
            
         }
         //string sortString = "id", string sortOrder = "asc", string searchValue = "", int pageSize = 10, int pageNumber = 1
-        [Route("students")]
+        [Route("students/search")]
         public IHttpActionResult SortStudent(string sortString = "id", string sortOrder = "asc", string searchValue = "", int pageSize = 10, int pageNumber = 1)
         {
             SearchAttribute search = new SearchAttribute

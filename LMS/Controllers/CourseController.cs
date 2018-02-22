@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace LMS.Controllers
 {
+    [Authorize]
     [RoutePrefix("api")]
     public class CourseController : ApiController
     {
@@ -21,7 +22,7 @@ namespace LMS.Controllers
             _courseManager = courseManager;
         }
         // GET: api/Course
-        [Route("courses")]
+        [Route("courses/getall")]
         public IHttpActionResult Get()
         {
            
