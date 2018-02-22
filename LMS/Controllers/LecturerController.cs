@@ -12,16 +12,16 @@ using System.Web.Http;
 namespace LMS.Controllers
 {
     [RoutePrefix("api")]
-    public class LectureController : ApiController
+    public class LecturerController : ApiController
     {
-        private readonly ILectureManager _lectureManager;
+        private readonly ILecturerManager _lectureManager;
 
-        public LectureController(ILectureManager LectureManager)
+        public LecturerController(ILecturerManager LectureManager)
         {
             _lectureManager = LectureManager;
         }
         // GET: api/Lecture
-        [Route("lectures/{id}/withcourses")]
+        [Route("lecturers/{id}/withcourses")]
         public IHttpActionResult GetLectureByIdWithCourses(int id)
         {
             var lecturecoursedto = _lectureManager.GetLectureByIdWithCourses(id);
@@ -30,23 +30,23 @@ namespace LMS.Controllers
         }
 
         //GET: api/Lecture/5
-        [Route("lectures/getall")]
+        [Route("lecturers/getall")]
         public IHttpActionResult GetAll()
         {
-            return Ok(Mapper.Map<List<Lecture>,List<LectureDto>>(_lectureManager.GetAll()));
+            return Ok(Mapper.Map<List<Lecturer>,List<LecturerDto>>(_lectureManager.GetAll()));
         }
 
-        [Route("lectures/{id}")]
+        [Route("lecturers/{id}")]
         public IHttpActionResult GetLecturesById(int id)
         {
             var Lecture = _lectureManager.GetLectureById(id);
             if (Lecture == null) return BadRequest();
-            else return Ok(Mapper.Map<Lecture,LectureDto>(Lecture));
+            else return Ok(Mapper.Map<Lecturer,LecturerDto>(Lecture));
         }
 
         // POST: api/Lecture
-        [Route("lectures/create")]
-        public IHttpActionResult Post(Lecture Lecture)
+        [Route("lecturers/create")]
+        public IHttpActionResult Post(Lecturer Lecture)
         {
             var stu = _lectureManager.CreateLecture(Lecture);
             if (stu != null) return Ok(Lecture);
@@ -54,12 +54,20 @@ namespace LMS.Controllers
         }
 
         // PUT: api/Lecture/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("lecturers")]
+        public IHttpActionResult Put([FromBody]Lecturer lecturer)
         {
+            var lec = _lectureManager.ModifyDetails(lecturer);
+            if (lec != null)
+
+                return Ok(Mapper.Map<Lecturer, LecturerDto>(lecturer));
+
+            else return BadRequest();
         }
 
         // DELETE: api/Lecture/5
-        [Route("lectures/delete")]
+        [Route("lecturers/delete")]
         public IHttpActionResult Delete(int id)
         {
             var Lecture = _lectureManager.GetLectureById(id);
@@ -67,8 +75,8 @@ namespace LMS.Controllers
             else return Ok(_lectureManager.Delete(Lecture));
 
         }
-        [Route("lectures/enroll")]
-        public IHttpActionResult Enroll(LectureCourse lectureCourse)
+        [Route("lecturers/enroll")]
+        public IHttpActionResult Enroll(LecturerCourse lectureCourse)
         {
             var temp = _lectureManager.EnrollCourse(lectureCourse);
 

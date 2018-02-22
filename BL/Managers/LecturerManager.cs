@@ -12,22 +12,22 @@ using System.Threading.Tasks;
 namespace BL.Managers
 {
 
-        public class LectureManager : ILectureManager
+        public class LecturerManager : ILecturerManager
         {
-            private ILectureRepository _lectureRepository;
-            private ILectureCourseRepository _lectureCourseRepository;
+            private ILecturerRepository _lectureRepository;
+            private ILecturerCourseRepository _lectureCourseRepository;
 
-        public LectureManager(ILectureRepository LectureRepository,ILectureCourseRepository lectureCourseRepository)
+        public LecturerManager(ILecturerRepository LectureRepository,ILecturerCourseRepository lectureCourseRepository)
             {
                 _lectureRepository = LectureRepository;
                 _lectureCourseRepository = lectureCourseRepository;
 
             }
 
-        public LectureCourse EnrollCourse(LectureCourse lectureCourse)
+        public LecturerCourse EnrollCourse(LecturerCourse lectureCourse)
         {
             
-            if (!_lectureCourseRepository.Records.Any(lc => lc.CourseId == lectureCourse.CourseId && lc.LectureId == lectureCourse.LectureId))
+            if (!_lectureCourseRepository.Records.Any(lc => lc.CourseId == lectureCourse.CourseId && lc.LecturerId == lectureCourse.LecturerId))
 
             {
                 _lectureCourseRepository.Add(lectureCourse);
@@ -38,7 +38,7 @@ namespace BL.Managers
             else return null;
         }
 
-        public Lecture CreateLecture(Lecture Lecture)
+        public Lecturer CreateLecture(Lecturer Lecture)
             {
 
             if (!_lectureRepository.Records.Any(x => x.Name == Lecture.Name))
@@ -51,7 +51,7 @@ namespace BL.Managers
                 }
             }
 
-            public List<Lecture> GetAll()
+            public List<Lecturer> GetAll()
             {
                 var lectures = _lectureRepository.GetAll().ToList();
 
@@ -59,7 +59,7 @@ namespace BL.Managers
 
             }
 
-            public Lecture GetLectureById(int id)
+            public Lecturer GetLectureById(int id)
             {
                 var Lecture = _lectureRepository.GetById(id);
                 if (Lecture != null)
@@ -67,7 +67,7 @@ namespace BL.Managers
                 else return null;
             }
 
-        public string Delete(Lecture lecture)
+        public string Delete(Lecturer lecture)
         {
             if (_lectureRepository.Records.Any(s => s.Id == lecture.Id))
             {
@@ -75,9 +75,9 @@ namespace BL.Managers
 
 
 
-                if (_lectureCourseRepository.Records.Any(sc => sc.LectureId == lecture.Id))
+                if (_lectureCourseRepository.Records.Any(sc => sc.LecturerId == lecture.Id))
                 {
-                    var lecturecourses = _lectureCourseRepository.Records.Where(sc => sc.LectureId == lecture.Id);
+                    var lecturecourses = _lectureCourseRepository.Records.Where(sc => sc.LecturerId == lecture.Id);
 
                     _lectureCourseRepository.Records.RemoveRange(lecturecourses);
 
@@ -92,11 +92,24 @@ namespace BL.Managers
 
         }
 
-        public LectureCourseDto GetLectureByIdWithCourses(int id)
+        public LecturerCourseDto GetLectureByIdWithCourses(int id)
             {
                 return _lectureRepository.GetLectureByIdWithCourses(id);
             }
+
+        public Lecturer ModifyDetails(Lecturer lecturer)
+        {
+            if (_lectureRepository.Records.Any(lc => lc.Id == lecturer.Id))
+            {
+                _lectureRepository.Update(lecturer);
+
+                return lecturer;
+            }
+            else return null;
         }
+    }
+
+        
 
 }
 

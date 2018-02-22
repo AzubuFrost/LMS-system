@@ -6,15 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="4b2e046ae4ea484d827bbc0c06ce7f47" Name="Diagram1">
         <EntityTypeShape EntityType="LMSModel.Course" Width="1.5" PointX="0.75" PointY="3.5" />
-        <EntityTypeShape EntityType="LMSModel.Lecture" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="LMSModel.LectureCourse" Width="1.5" PointX="3" PointY="3.75" />
         <EntityTypeShape EntityType="LMSModel.Student" Width="1.5" PointX="0.75" PointY="7" />
         <EntityTypeShape EntityType="LMSModel.StudentCourse" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="LMSModel.User" Width="1.5" PointX="5.75" PointY="2.125" />
-        <AssociationConnector Association="LMSModel.FK_LectureCourse_Course" />
         <AssociationConnector Association="LMSModel.FK_StudentCourse_Course" />
-        <AssociationConnector Association="LMSModel.FK_LectureCourse_Lecture" />
         <AssociationConnector Association="LMSModel.FK_StudentCourse_Student" />
+        <EntityTypeShape EntityType="LMSModel.Lecturer" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="LMSModel.LecturerCourse" Width="1.5" PointX="3" PointY="6.75" />
+        <AssociationConnector Association="LMSModel.FK_LectureCourse_Course1" />
+        <AssociationConnector Association="LMSModel.FK_LectureCourse_Lecture1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

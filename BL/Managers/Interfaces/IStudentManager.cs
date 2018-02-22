@@ -24,6 +24,8 @@ namespace BL.Managers.Interfaces
         StudentSearchDto SearchStudent(SearchAttribute search);
 
         StudentCourse EnrollCourse(StudentCourse studentCourse);
+
+        Student ModifyDetails(Student student);
     }
 
 }

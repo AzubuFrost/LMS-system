@@ -13,9 +13,9 @@ namespace BL.Managers
     {
         private ICourseRepository _courseRepository;
         private IStudentCourseRepository _studentCourseRepository;
-        private ILectureCourseRepository _lectureCourseRepository;
+        private ILecturerCourseRepository _lectureCourseRepository;
 
-        public CourseManager(ICourseRepository courseRepository, IStudentCourseRepository studentCourseRepository, ILectureCourseRepository lectureCourseRepository)
+        public CourseManager(ICourseRepository courseRepository, IStudentCourseRepository studentCourseRepository, ILecturerCourseRepository lectureCourseRepository)
         {
             _courseRepository = courseRepository;
             _studentCourseRepository = studentCourseRepository;
@@ -70,6 +70,17 @@ namespace BL.Managers
        public List<Course> getAll()
         {
             return _courseRepository.GetAll().ToList();
+        }
+
+        public Course ModifyDetails(Course course)
+        {
+            if (_courseRepository.Records.Any(lc => lc.Id == course.Id))
+            {
+                _courseRepository.Update(course);
+
+                return course;
+            }
+            else return null;
         }
     }
 }

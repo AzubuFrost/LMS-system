@@ -28,10 +28,10 @@ namespace Data.Database
         }
     
         public virtual DbSet<Course> Courses { get; set; }
-        public virtual DbSet<Lecture> Lectures { get; set; }
-        public virtual DbSet<LectureCourse> LectureCourses { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentCourse> StudentCourses { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Lecturer> Lecturers { get; set; }
+        public virtual DbSet<LecturerCourse> LecturerCourses { get; set; }
     }
 }

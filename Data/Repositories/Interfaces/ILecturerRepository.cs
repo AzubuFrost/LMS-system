@@ -1,4 +1,5 @@
-﻿using Model.Model;
+﻿using Model.Dto;
+using Model.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories.Interfaces
 {
-   public interface ILectureCourseRepository :IGenericRepository<LectureCourse>
+   public interface ILecturerRepository : IGenericRepository<Lecturer>
     {
-
+        LecturerCourseDto GetLectureByIdWithCourses(int id);
     }
 }

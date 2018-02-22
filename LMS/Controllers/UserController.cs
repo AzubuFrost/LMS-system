@@ -20,7 +20,7 @@ namespace LMS.Controllers
         }
 
         [HttpPost]
-        [Route("api/test/createuser")]
+        [Route("api/user/createuser")]
         public IHttpActionResult Post(UserRegisterDto user)
         {
             var userDisplay = _userManager.CreateUser(user);
@@ -30,16 +30,17 @@ namespace LMS.Controllers
 
 
 
-        [HttpGet]
-        [Route("api/test")]
-        public IHttpActionResult Test()
+        [HttpPost]
+        [Route("api/user/login")]
+        public IHttpActionResult Login(String username,String password)
         {
-            using (LMSEntities context = new LMSEntities())
-            {
-               
-                var students = context.Students.ToList();
-                return Ok(students);
-            }
+            var user = _userManager.FindUser(username, password);
+
+            if (user == null)
+
+                return NotFound();
+
+            else return Ok(user);
         }
 
     }

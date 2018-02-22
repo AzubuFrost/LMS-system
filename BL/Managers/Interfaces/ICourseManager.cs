@@ -16,5 +16,7 @@ namespace BL.Managers.Interfaces
         Course CreateCourse(Course course);
 
         string Delete(Course course);
+
+        Course ModifyDetails(Course course);
     }
 }

@@ -83,10 +83,10 @@
     <Compile Include="Managers\CourseManager.cs" />
     <Compile Include="Managers\Interfaces\IAuthManager.cs" />
     <Compile Include="Managers\Interfaces\ICourseManager.cs" />
-    <Compile Include="Managers\Interfaces\ILectureManager.cs" />
+    <Compile Include="Managers\Interfaces\ILecturerManager.cs" />
     <Compile Include="Managers\Interfaces\IStudentManager.cs" />
     <Compile Include="Managers\Interfaces\IUserManager.cs" />
-    <Compile Include="Managers\LectureManager.cs" />
+    <Compile Include="Managers\LecturerManager.cs" />
     <Compile Include="Managers\StudentManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

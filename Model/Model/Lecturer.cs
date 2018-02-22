@@ -12,13 +12,18 @@ namespace Model.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class LectureCourse
+    public partial class Lecturer
     {
-        public int Id { get; set; }
-        public int LectureId { get; set; }
-        public int CourseId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Lecturer()
+        {
+            this.LecturerCourses = new HashSet<LecturerCourse>();
+        }
     
-        public virtual Course Course { get; set; }
-        public virtual Lecture Lecture { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LecturerCourse> LecturerCourses { get; set; }
     }
 }

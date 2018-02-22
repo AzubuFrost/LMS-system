@@ -93,13 +93,13 @@
     <Compile Include="Repositories\Interfaces\IAuthRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICourseRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
-    <Compile Include="Repositories\Interfaces\ILectureCourseRepository.cs" />
-    <Compile Include="Repositories\Interfaces\ILectureRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILecturerCourseRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ILecturerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStudentCourseRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStudentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
-    <Compile Include="Repositories\LectureCourseRepository.cs" />
-    <Compile Include="Repositories\LectureRepository.cs" />
+    <Compile Include="Repositories\LecturerCourseRepository.cs" />
+    <Compile Include="Repositories\LecturerRepository.cs" />
     <Compile Include="Repositories\StudentCourseRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

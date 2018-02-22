@@ -17,8 +17,8 @@ namespace Model.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Course()
         {
-            this.LectureCourses = new HashSet<LectureCourse>();
             this.StudentCourses = new HashSet<StudentCourse>();
+            this.LecturerCourses = new HashSet<LecturerCourse>();
         }
     
         public int Id { get; set; }
@@ -28,8 +28,8 @@ namespace Model.Model
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LectureCourse> LectureCourses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LecturerCourse> LecturerCourses { get; set; }
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    public class LectureCourseRepository : GenericRepository<LectureCourse>, ILectureCourseRepository
+    public class LecturerCourseRepository : GenericRepository<LecturerCourse>, ILecturerCourseRepository
     {
-        public LectureCourseRepository(LMSEntities context) : base(context)
+        public LecturerCourseRepository(LMSEntities context) : base(context)
         {
 
         }

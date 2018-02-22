@@ -15,19 +15,19 @@
           <Property Name="Fee" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MaxStudent" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Lecture">
+        <EntityType Name="Lecturer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
         </EntityType>
-        <EntityType Name="LectureCourse">
+        <EntityType Name="LecturerCourse">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LectureId" Type="int" Nullable="false" />
+          <Property Name="LecturerId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
@@ -64,25 +64,25 @@
         </EntityType>
         <Association Name="FK_LectureCourse_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="LectureCourse" Type="Self.LectureCourse" Multiplicity="*" />
+          <End Role="LecturerCourse" Type="Self.LecturerCourse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="LectureCourse">
+            <Dependent Role="LecturerCourse">
               <PropertyRef Name="CourseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_LectureCourse_Lecture">
-          <End Role="Lecture" Type="Self.Lecture" Multiplicity="1" />
-          <End Role="LectureCourse" Type="Self.LectureCourse" Multiplicity="*" />
+          <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="1" />
+          <End Role="LecturerCourse" Type="Self.LecturerCourse" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Lecture">
+            <Principal Role="Lecturer">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="LectureCourse">
-              <PropertyRef Name="LectureId" />
+            <Dependent Role="LecturerCourse">
+              <PropertyRef Name="LecturerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -112,18 +112,18 @@
         </Association>
         <EntityContainer Name="LMSModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lecture" EntityType="Self.Lecture" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LectureCourse" EntityType="Self.LectureCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecturer" EntityType="Self.Lecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LecturerCourse" EntityType="Self.LecturerCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentCourse" EntityType="Self.StudentCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_LectureCourse_Course" Association="Self.FK_LectureCourse_Course">
             <End Role="Course" EntitySet="Course" />
-            <End Role="LectureCourse" EntitySet="LectureCourse" />
+            <End Role="LecturerCourse" EntitySet="LecturerCourse" />
           </AssociationSet>
           <AssociationSet Name="FK_LectureCourse_Lecture" Association="Self.FK_LectureCourse_Lecture">
-            <End Role="Lecture" EntitySet="Lecture" />
-            <End Role="LectureCourse" EntitySet="LectureCourse" />
+            <End Role="Lecturer" EntitySet="Lecturer" />
+            <End Role="LecturerCourse" EntitySet="LecturerCourse" />
           </AssociationSet>
           <AssociationSet Name="FK_StudentCourse_Course" Association="Self.FK_StudentCourse_Course">
             <End Role="Course" EntitySet="Course" />
@@ -140,26 +140,26 @@
       <Schema Namespace="LMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LMSEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Courses" EntityType="LMSModel.Course" />
-          <EntitySet Name="Lectures" EntityType="LMSModel.Lecture" />
-          <EntitySet Name="LectureCourses" EntityType="LMSModel.LectureCourse" />
           <EntitySet Name="Students" EntityType="LMSModel.Student" />
           <EntitySet Name="StudentCourses" EntityType="LMSModel.StudentCourse" />
           <EntitySet Name="Users" EntityType="LMSModel.User" />
-          <AssociationSet Name="FK_LectureCourse_Course" Association="LMSModel.FK_LectureCourse_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="LectureCourse" EntitySet="LectureCourses" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentCourse_Course" Association="LMSModel.FK_StudentCourse_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="StudentCourse" EntitySet="StudentCourses" />
           </AssociationSet>
-          <AssociationSet Name="FK_LectureCourse_Lecture" Association="LMSModel.FK_LectureCourse_Lecture">
-            <End Role="Lecture" EntitySet="Lectures" />
-            <End Role="LectureCourse" EntitySet="LectureCourses" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentCourse_Student" Association="LMSModel.FK_StudentCourse_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentCourse" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <EntitySet Name="Lecturers" EntityType="LMSModel.Lecturer" />
+          <EntitySet Name="LecturerCourses" EntityType="LMSModel.LecturerCourse" />
+          <AssociationSet Name="FK_LectureCourse_Course1" Association="LMSModel.FK_LectureCourse_Course1">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="LecturerCourse" EntitySet="LecturerCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LectureCourse_Lecture1" Association="LMSModel.FK_LectureCourse_Lecture1">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="LecturerCourse" EntitySet="LecturerCourses" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Course">
@@ -170,27 +170,9 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Fee" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="MaxStudent" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="LectureCourses" Relationship="LMSModel.FK_LectureCourse_Course" FromRole="Course" ToRole="LectureCourse" />
           <NavigationProperty Name="StudentCourses" Relationship="LMSModel.FK_StudentCourse_Course" FromRole="Course" ToRole="StudentCourse" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Lecture">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LectureCourses" Relationship="LMSModel.FK_LectureCourse_Lecture" FromRole="Lecture" ToRole="LectureCourse" />
-        </EntityType>
-        <EntityType Name="LectureCourse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="LectureId" Type="Int32" Nullable="false" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Course" Relationship="LMSModel.FK_LectureCourse_Course" FromRole="LectureCourse" ToRole="Course" />
-          <NavigationProperty Name="Lecture" Relationship="LMSModel.FK_LectureCourse_Lecture" FromRole="LectureCourse" ToRole="Lecture" />
+          <NavigationProperty Name="LecturerCourses" Relationship="LMSModel.FK_LectureCourse_Course1" FromRole="Course" ToRole="LecturerCourse" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -227,18 +209,6 @@
           <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK_LectureCourse_Course">
-          <End Type="LMSModel.Course" Role="Course" Multiplicity="1" />
-          <End Type="LMSModel.LectureCourse" Role="LectureCourse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LectureCourse">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentCourse_Course">
           <End Type="LMSModel.Course" Role="Course" Multiplicity="1" />
           <End Type="LMSModel.StudentCourse" Role="StudentCourse" Multiplicity="*" />
@@ -251,18 +221,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LectureCourse_Lecture">
-          <End Type="LMSModel.Lecture" Role="Lecture" Multiplicity="1" />
-          <End Type="LMSModel.LectureCourse" Role="LectureCourse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lecture">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LectureCourse">
-              <PropertyRef Name="LectureId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentCourse_Student">
           <End Type="LMSModel.Student" Role="Student" Multiplicity="1" />
           <End Type="LMSModel.StudentCourse" Role="StudentCourse" Multiplicity="*" />
@@ -272,6 +230,48 @@
             </Principal>
             <Dependent Role="StudentCourse">
               <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LecturerCourses" Relationship="LMSModel.FK_LectureCourse_Lecture1" FromRole="Lecturer" ToRole="LecturerCourse" />
+        </EntityType>
+        <EntityType Name="LecturerCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LecturerId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="LMSModel.FK_LectureCourse_Course1" FromRole="LecturerCourse" ToRole="Course" />
+          <NavigationProperty Name="Lecturer" Relationship="LMSModel.FK_LectureCourse_Lecture1" FromRole="LecturerCourse" ToRole="Lecturer" />
+        </EntityType>
+        <Association Name="FK_LectureCourse_Course1">
+          <End Type="LMSModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="LMSModel.LecturerCourse" Role="LecturerCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LecturerCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LectureCourse_Lecture1">
+          <End Type="LMSModel.Lecturer" Role="Lecturer" Multiplicity="1" />
+          <End Type="LMSModel.LecturerCourse" Role="LecturerCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LecturerCourse">
+              <PropertyRef Name="LecturerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,23 +288,6 @@
                 <ScalarProperty Name="MaxStudent" ColumnName="MaxStudent" />
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Lectures">
-            <EntityTypeMapping TypeName="LMSModel.Lecture">
-              <MappingFragment StoreEntitySet="Lecture">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LectureCourses">
-            <EntityTypeMapping TypeName="LMSModel.LectureCourse">
-              <MappingFragment StoreEntitySet="LectureCourse">
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="LectureId" ColumnName="LectureId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -340,6 +323,23 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="LMSModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturer">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LecturerCourses">
+            <EntityTypeMapping TypeName="LMSModel.LecturerCourse">
+              <MappingFragment StoreEntitySet="LecturerCourse">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="LecturerId" ColumnName="LecturerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

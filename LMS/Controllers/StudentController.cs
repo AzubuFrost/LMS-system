@@ -57,8 +57,14 @@ namespace LMS.Controllers
         }
 
         // PUT: api/Student/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("students")]
+        public IHttpActionResult ModifiyDetails([FromBody]Student student)
         {
+            var st = _studentManager.ModifyDetails(student);
+            if (st != null)
+                return Ok(Mapper.Map<Student, StudentDto>(student));
+            else return BadRequest();   
         }
 
         // DELETE: api/Student/5

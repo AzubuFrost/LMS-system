@@ -28,7 +28,13 @@ namespace Data.Repositories
         //Authentication Provider class in Steps below
         public User FindUser(string userName, string passwordHash)
         {
-            return _context.Users.FirstOrDefault(x => x.UserName == userName && x.PasswordHash == passwordHash);
+            if (_context.Users.Any(x => x.UserName == userName && x.PasswordHash == passwordHash))
+
+                return _context.Users.FirstOrDefault(x => x.UserName == userName && x.PasswordHash == passwordHash);
+
+            else return null;
+
+            
         }
     }
 
