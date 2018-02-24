@@ -35,6 +35,8 @@ namespace BL.Util
                     return isAscending ? students.OrderBy(x => x.Email) : students.OrderByDescending(x => x.Email);
                 case "dateofbirth":
                     return isAscending ? students.OrderBy(x => x.DateOfBirth) : students.OrderByDescending(x => x.DateOfBirth);
+                case "credit":
+                    return isAscending ? students.OrderBy(x => x.Credit) : students.OrderByDescending(x => x.Credit);
                 default:
                     return students.OrderBy(x => x.Id);
             }

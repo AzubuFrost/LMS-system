@@ -116,7 +116,7 @@ namespace BL.Managers
             }
             var students = _studentRepository.Records.Search(search.SearchValue);
 
-            students = students.ApplySort(search.SortString, search.SortOrder);
+            students = students.ApplySort(search.SortOrder, search.SortString);
 
             var SearchResult = new StudentSearchDto
             {
