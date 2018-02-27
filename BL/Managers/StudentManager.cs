@@ -112,7 +112,7 @@ namespace BL.Managers
             }
             if (search.PageSize == 0)
             {
-                search.PageSize = 10; 
+                search.PageSize = 20; 
             }
             var students = _studentRepository.Records.Search(search.SearchValue);
 

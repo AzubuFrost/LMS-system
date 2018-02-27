@@ -11,7 +11,7 @@ namespace BL.Util
     {
         public static IEnumerable<Student> Search(this IEnumerable<Student> students, string searchValue)
         {
-            return students.Where(x => x.FirstName.Contains(searchValue) || x.LastName.Contains(searchValue) || x.Email.Contains(searchValue));
+            return students.Where(x => x.FirstName.Contains(searchValue.ToLower()) || x.LastName.Contains(searchValue.ToLower()) || x.Email.Contains(searchValue.ToLower()));
 
         }
         public static IEnumerable<Student> ApplySort(this IEnumerable<Student> students, string sortOrder, string sortString)
