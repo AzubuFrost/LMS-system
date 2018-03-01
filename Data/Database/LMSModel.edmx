@@ -21,6 +21,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="StaffNumber" Type="nvarchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <EntityType Name="LecturerCourse">
           <Key>
@@ -62,7 +64,7 @@
           <Property Name="PasswordHash" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_LectureCourse_Course">
+        <Association Name="FK_LecturerCourse_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="LecturerCourse" Type="Self.LecturerCourse" Multiplicity="*" />
           <ReferentialConstraint>
@@ -74,7 +76,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LectureCourse_Lecture">
+        <Association Name="FK_LecturerCourse_Lecturer">
           <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="1" />
           <End Role="LecturerCourse" Type="Self.LecturerCourse" Multiplicity="*" />
           <ReferentialConstraint>
@@ -117,11 +119,11 @@
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentCourse" EntityType="Self.StudentCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_LectureCourse_Course" Association="Self.FK_LectureCourse_Course">
+          <AssociationSet Name="FK_LecturerCourse_Course" Association="Self.FK_LecturerCourse_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="LecturerCourse" EntitySet="LecturerCourse" />
           </AssociationSet>
-          <AssociationSet Name="FK_LectureCourse_Lecture" Association="Self.FK_LectureCourse_Lecture">
+          <AssociationSet Name="FK_LecturerCourse_Lecturer" Association="Self.FK_LecturerCourse_Lecturer">
             <End Role="Lecturer" EntitySet="Lecturer" />
             <End Role="LecturerCourse" EntitySet="LecturerCourse" />
           </AssociationSet>
@@ -240,6 +242,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LecturerCourses" Relationship="LMSModel.FK_LectureCourse_Lecture1" FromRole="Lecturer" ToRole="LecturerCourse" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StaffNumber" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LecturerCourse">
           <Key>
@@ -330,6 +334,8 @@
           <EntitySetMapping Name="Lecturers">
             <EntityTypeMapping TypeName="LMSModel.Lecturer">
               <MappingFragment StoreEntitySet="Lecturer">
+                <ScalarProperty Name="StaffNumber" ColumnName="StaffNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

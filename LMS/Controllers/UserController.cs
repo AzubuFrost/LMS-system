@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace LMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UserController : ApiController
     {
         private readonly IUserManager _userManager;

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\学习\Full Stack training\2018.1.17\LMS - Backup with Lecture - Copy\Data\Database\LMSModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ShirleyLovey\Desktop\LMS\Data\Database\LMSModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
