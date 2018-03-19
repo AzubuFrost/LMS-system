@@ -21,5 +21,7 @@ namespace Model.Model
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public System.DateTime CreatedOn { get; set; }
+        public string AccountType { get; set; }
+        public int PersonalId { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace LMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api")]
     public class CourseController : ApiController
     {
@@ -65,8 +65,8 @@ namespace LMS.Controllers
         }
 
         // DELETE: api/Course/5
-        [HttpPost]
-        [Route("courses/delete")]
+        [HttpDelete]
+        [Route("courses/delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
             var course = _courseManager.getById(id);

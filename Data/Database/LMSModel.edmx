@@ -20,9 +20,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="200" />
-          <Property Name="StaffNumber" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="StaffNumber" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="LecturerCourse">
           <Key>
@@ -63,6 +63,8 @@
           <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="AccountType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonalId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_LecturerCourse_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
@@ -76,7 +78,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LecturerCourse_Lecturer">
+        <Association Name="FK_LecturerCourse_Lecture">
           <End Role="Lecturer" Type="Self.Lecturer" Multiplicity="1" />
           <End Role="LecturerCourse" Type="Self.LecturerCourse" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,7 +125,7 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="LecturerCourse" EntitySet="LecturerCourse" />
           </AssociationSet>
-          <AssociationSet Name="FK_LecturerCourse_Lecturer" Association="Self.FK_LecturerCourse_Lecturer">
+          <AssociationSet Name="FK_LecturerCourse_Lecture" Association="Self.FK_LecturerCourse_Lecture">
             <End Role="Lecturer" EntitySet="Lecturer" />
             <End Role="LecturerCourse" EntitySet="LecturerCourse" />
           </AssociationSet>
@@ -210,6 +212,8 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccountType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PersonalId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_StudentCourse_Course">
           <End Type="LMSModel.Course" Role="Course" Multiplicity="1" />
@@ -240,10 +244,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LecturerCourses" Relationship="LMSModel.FK_LectureCourse_Lecture1" FromRole="Lecturer" ToRole="LecturerCourse" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="StaffNumber" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StaffNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LecturerCourse">
           <Key>
@@ -321,6 +325,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="LMSModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="PersonalId" ColumnName="PersonalId" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -358,7 +364,7 @@
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="CopyToOutputDirectory" />
       </DesignerInfoPropertySet>
     </Connection>
     <Options>
