@@ -88,9 +88,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LMSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Message.cs">
-      <DependentUpon>LMSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\Student.cs">
       <DependentUpon>LMSModel.tt</DependentUpon>
     </Compile>

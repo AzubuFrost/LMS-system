@@ -29,10 +29,6 @@ namespace Model.Dto
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        [Required]
-        public string AccountType { get; set; }
-        [Required]
-        public int PersonalId { get; set; }
     }
 
 }
