@@ -33,5 +33,6 @@ namespace Data.Database
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<LecturerCourse> LecturerCourses { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }

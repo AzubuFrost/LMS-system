@@ -44,5 +44,10 @@ namespace BL.Util
                     return students.OrderBy(x => x.Id);
             }
         }
+
+        public static List<Message> ApplySort(this List<Message> messages)
+        {
+            return messages.OrderBy(msg => msg.CreateOn).ToList();
+        }
     }
 }

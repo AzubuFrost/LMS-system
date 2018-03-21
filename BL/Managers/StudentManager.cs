@@ -136,6 +136,7 @@ namespace BL.Managers
             if (_studentRepository.Records.Any(st => st.Id == student.Id))
             {
                 _studentRepository.Update(student);
+
                 return student;
             }
             else return null;

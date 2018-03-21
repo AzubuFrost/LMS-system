@@ -15,6 +15,9 @@
         <EntityTypeShape EntityType="LMSModel.LecturerCourse" Width="1.5" PointX="3" PointY="6.75" />
         <AssociationConnector Association="LMSModel.FK_LectureCourse_Course1" />
         <AssociationConnector Association="LMSModel.FK_LectureCourse_Lecture1" />
+        <EntityTypeShape EntityType="LMSModel.Message" Width="1.5" PointX="3" PointY="10" />
+        <AssociationConnector Association="LMSModel.FK_Message_Lecture" />
+        <AssociationConnector Association="LMSModel.FK_Message_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

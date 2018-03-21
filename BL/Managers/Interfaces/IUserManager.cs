@@ -10,7 +10,9 @@ namespace BL.Managers.Interfaces
 {
     public interface IUserManager
     {
-        UserDisplayDto CreateUser(UserRegisterDto user); User FindUser(string userName, string password);
+        UserDisplayDto CreateUser(UserRegisterDto user);
+        User FindUser(string userName, string password);
+        List<Course> getCourseFromUser(UserDisplayDto user);
     }
 
 }
