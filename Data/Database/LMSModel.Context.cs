@@ -9,17 +9,16 @@
 
 namespace Data.Database
 {
+    using Model.Model;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using Model.Model;
     
     public partial class LMSEntities : DbContext
     {
         public LMSEntities()
             : base("name=LMSEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,11 +27,11 @@ namespace Data.Database
         }
     
         public virtual DbSet<Course> Courses { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<StudentCourse> StudentCourses { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<LecturerCourse> LecturerCourses { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<StudentCourse> StudentCourses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

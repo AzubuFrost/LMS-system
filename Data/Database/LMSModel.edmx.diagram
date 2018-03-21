@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4b2e046ae4ea484d827bbc0c06ce7f47" Name="Diagram1">
-        <EntityTypeShape EntityType="LMSModel.Course" Width="1.5" PointX="0.75" PointY="3.5" />
-        <EntityTypeShape EntityType="LMSModel.Student" Width="1.5" PointX="0.75" PointY="7" />
-        <EntityTypeShape EntityType="LMSModel.StudentCourse" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="LMSModel.User" Width="1.5" PointX="5.75" PointY="2.125" />
-        <AssociationConnector Association="LMSModel.FK_StudentCourse_Course" />
-        <AssociationConnector Association="LMSModel.FK_StudentCourse_Student" />
-        <EntityTypeShape EntityType="LMSModel.Lecturer" Width="1.5" PointX="0.75" PointY="11" />
-        <EntityTypeShape EntityType="LMSModel.LecturerCourse" Width="1.5" PointX="3" PointY="6.75" />
-        <AssociationConnector Association="LMSModel.FK_LectureCourse_Course1" />
-        <AssociationConnector Association="LMSModel.FK_LectureCourse_Lecture1" />
-        <EntityTypeShape EntityType="LMSModel.Message" Width="1.5" PointX="3" PointY="10" />
-        <AssociationConnector Association="LMSModel.FK_Message_Lecture" />
-        <AssociationConnector Association="LMSModel.FK_Message_Student" />
+      <Diagram DiagramId="377e76b906784b2eb5abacadaa5c2a12" Name="Diagram1">
+        <EntityTypeShape EntityType="LMSModel.Course" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.Lecturer" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.LecturerCourse" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.Message" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.Student" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.StudentCourse" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LMSModel.User" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="LMSModel.FK_LecturerCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="LMSModel.FK_StudentCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="LMSModel.FK_LecturerCourse_Lecture" ManuallyRouted="false" />
+        <AssociationConnector Association="LMSModel.FK_Message_Lecture" ManuallyRouted="false" />
+        <AssociationConnector Association="LMSModel.FK_Message_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="LMSModel.FK_StudentCourse_Student" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

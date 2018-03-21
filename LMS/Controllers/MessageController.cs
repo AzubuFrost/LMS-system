@@ -1,4 +1,6 @@
-﻿using BL.Managers.Interfaces;
+﻿using AutoMapper;
+using BL.Managers.Interfaces;
+using Model.Dto;
 using Model.Model;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,7 @@ namespace LMS.Controllers
             var message = _messageManager.getMessageByLecturerId(id);
             if (message != null)
             {
-                return Ok(message);
+                return Ok(Mapper.Map<List<Message>,List<MessageDto>>(message));
             }
             else return Ok("No message has been found");
         }
@@ -38,7 +40,7 @@ namespace LMS.Controllers
             var message = _messageManager.getMessageByStudentId(id);
             if (message != null)
             {
-                return Ok(message);
+                return Ok(Mapper.Map<List<Message>, List<MessageDto>>(message));
             }
             else return Ok("No message has been found");
         }

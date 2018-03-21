@@ -19,8 +19,9 @@ namespace Model.Model
         public int Id { get; set; }
         public string Details { get; set; }
         public System.DateTime CreateOn { get; set; }
-    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual Lecturer Lecturer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual Student Student { get; set; }
     }
 }

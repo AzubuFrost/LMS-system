@@ -69,6 +69,7 @@
     <Compile Include="Dto\CourseDto.cs" />
     <Compile Include="Dto\LecturerCourseDto.cs" />
     <Compile Include="Dto\LecturerDto.cs" />
+    <Compile Include="Dto\MessageDto.cs" />
     <Compile Include="Dto\StudentSearchDto.cs" />
     <Compile Include="Dto\StudentCourseDto.cs" />
     <Compile Include="Dto\StudentDto.cs" />

@@ -44,9 +44,17 @@ namespace BL.Managers
 
         public String setMessage(Message message)
         {
+            var msg = new Message
+            {
+                StudentId = message.StudentId,
+                LecturerId = message.LecturerId,
+                Details = message.Details,
+                CreateOn = DateTime.Now
+            };
+
             if (message.Details != "")
             {
-                _messageRepository.Add(message);
+                _messageRepository.Add(msg);
                 return "Message Sent!";
             }
             else return "cannot send void message!";
