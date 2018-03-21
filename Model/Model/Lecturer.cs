@@ -18,6 +18,7 @@ namespace Model.Model
         public Lecturer()
         {
             this.LecturerCourses = new HashSet<LecturerCourse>();
+            this.Messages = new HashSet<Message>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace Model.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LecturerCourse> LecturerCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

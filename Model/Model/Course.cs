@@ -17,19 +17,19 @@ namespace Model.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Course()
         {
-            this.StudentCourses = new HashSet<StudentCourse>();
             this.LecturerCourses = new HashSet<LecturerCourse>();
+            this.StudentCourses = new HashSet<StudentCourse>();
         }
     
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public decimal Fee { get; set; }
         public int MaxStudent { get; set; }
-        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentCourse> StudentCourses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LecturerCourse> LecturerCourses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; }
     }
 }

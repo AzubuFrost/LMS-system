@@ -95,11 +95,13 @@
     <Compile Include="Repositories\Interfaces\IGenericRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILecturerCourseRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILecturerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMessageRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStudentCourseRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStudentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\LecturerCourseRepository.cs" />
     <Compile Include="Repositories\LecturerRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\StudentCourseRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
@@ -123,14 +125,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Database\LMSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LMSModel.edmx</DependentUpon>
       <LastGenOutput>LMSModel.Context.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

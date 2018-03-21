@@ -17,6 +17,7 @@ namespace Model.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.Messages = new HashSet<Message>();
             this.StudentCourses = new HashSet<StudentCourse>();
         }
     
@@ -28,6 +29,8 @@ namespace Model.Model
         public string Email { get; set; }
         public Nullable<decimal> Credit { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentCourse> StudentCourses { get; set; }
     }
